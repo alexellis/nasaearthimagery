@@ -1,31 +1,41 @@
 ## NASA Earth Imagery
+==============================
 
-Download a tile/thumbnail from the LandSat 8 dataset. 
+* Find a fly-by from the (assets) Landsat 8 satellite
+* Download a thumbnail from the (imagery) endpoint
 
-#### Installation / running
+### Installation
 
-Create directory called 'images'
-` mkdir -p images`
+With Node 4.x or greater:
 
 ```
+git clone http://github.com/alexellis/nasaearthimagery
 npm install
-
-node app lat lon
 ```
 
-#### How the program works
+### Running the code:
 
-First find all passes by date of the satellite, then request a thumbnail from the API
+```
+node app.js
+```
 
-Follow API through and download the images in batches of 5.
+Alter app.js for the specific latitude and longitude:
 
-The queuing mechanism is used to off-set throttling on the data-API.
+```
 
-[Blog entry](http://quad.ae24.space/nasa-earth-imagery-api/)
+// Plane grave-yard
+var lat=32.1499889;
+var lon=-110.8358417;
 
+var when = moment("2015-01-01").toDate();
+var cloudScore = true;
+var filePrefix = "plane_graveyard_";
+```
 
-#### Known issues
+### Deprecated feature
 
-Nasa appear to have deprecated the use of the tileDimension parameter from the API. You may want to comment this out.
+Nasa's assets endpoint used to allow a 'dim' parameter to be passed in specifying the zoom level on the resuling thumbnails. Unfortunately this appears to have been broken for over a year already and I doubt they will fix it.
 
-
+```
+{"message": "Admins have been notified.", "error": "unsupported operand type(s) for /: 'unicode' and 'int'"}
+```
